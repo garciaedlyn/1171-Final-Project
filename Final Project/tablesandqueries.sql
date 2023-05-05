@@ -312,7 +312,8 @@ SELECT AVG(sg.cgpa) as avg__course_gpa,c. course_title
 FROM semester_grades as sg
 INNER JOIN courses as c 
 ON c.course_id=sg.course_id
-GROUP BY c.course_title;
+GROUP BY c.course_title
+ORDER BY avg__course_gpa DESC;
 
   --Queries based on project 2 Database that will assist in analyzing and creating the rentention strategy.
 
@@ -454,7 +455,7 @@ WHERE p.program_code = 'AINT';
 
 --11.Find the percentage of students who failed Math courses in the AINT program --works
 SELECT 
-COUNT(CASE WHEN c.course_code LIKE 'MATH%' AND g.course_points < 7.5 THEN 1 END)* 100.0 / COUNT(CASE WHEN p.program_code = 'AINT' THEN 1 END) AS pass_rate
+COUNT(CASE WHEN c.course_code LIKE 'MATH%' AND g.course_points < 7.5 THEN 1 END)* 100.0 / COUNT(CASE WHEN p.program_code = 'AINT' THEN 1 END) AS fail_rate
 FROM student_information s
 INNER JOIN feeder f 
 ON s.feeder_id = f.feeder_id
@@ -469,7 +470,7 @@ ON c.course_id = cp.course_id
 WHERE p.program_code = 'AINT';
 --12.Find the percentage of students who failed IT courses in the AINT program --works
 SELECT 
-COUNT(CASE WHEN c.course_code LIKE 'CMPS%' AND g.course_points <7.5 THEN 1 END)* 100.0 / COUNT(CASE WHEN p.program_code = 'AINT' THEN 1 END) AS pass_rate
+COUNT(CASE WHEN c.course_code LIKE 'CMPS%' AND g.course_points <7.5 THEN 1 END)* 100.0 / COUNT(CASE WHEN p.program_code = 'AINT' THEN 1 END) AS fail_rate
 FROM student_information s
 INNER JOIN feeder f 
 ON s.feeder_id = f.feeder_id
